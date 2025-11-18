@@ -11,8 +11,8 @@ app.get('/math/circle/:r', (req, res) => {
   }
   
   const result = {
-    area: Math.PI * radius * radius,
-    circumference: 2 * Math.PI * radius
+    area: (Math.PI * radius * radius).toFixed(2),
+    circumference: (2 * Math.PI * radius).toFixed(2)
   };
   
   res.json(result);
