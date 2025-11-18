@@ -7,7 +7,7 @@ app.get('/math/circle/:r', (req, res) => {
   const radius = parseFloat(req.params.r);
   
   if (isNaN(radius) || radius < 0) {
-    return res.status(400).json({ error: 'Invalid radius.' });
+    return res.status(400).json({ error: 'Invalid radius. Please provide a positive number.' });
   }
   
   const result = {
@@ -23,7 +23,7 @@ app.get('/math/rectangle/:width/:height', (req, res) => {
   const height = parseFloat(req.params.height);
   
   if (isNaN(width) || isNaN(height) || width < 0 || height < 0) {
-    return res.status(400).json({ error: 'Invalid dimensions.' });
+    return res.status(400).json({ error: 'Invalid dimensions. Please provide positive numbers.' });
   }
   
   const result = {
