@@ -34,6 +34,37 @@ app.get('/math/rectangle/:width/:height', (req, res) => {
   res.json(result);
 });
 
+app.get('/math/power/:base/:exponent', (req, res) => {
+  const { base, exponent } = req.params;
+  const b = Number(base);
+  const e = Number(exponent);
+
+  if (!isFinite(b) || !isFinite(e)) {
+    return res.status(400).json({ error: 'Invalid input' });
+  }
+
+  const result = Math.pow(b, e);
+
+  if (!isFinite(result)) {
+    return res.status(400).json({ error: 'Invalid input' });
+  }
+
+  const response = { result };
+
+  if (req.query.root === 'true') {
+    if (b < 0) {
+      return res.status(400).json({ error: 'Invalid input' });
+    }
+    const root = Math.sqrt(b);
+    if (!isFinite(root)) {
+      return res.status(400).json({ error: 'Invalid input' });
+    }
+    response.root = root;
+  }
+
+  return res.json(response);
+});
+
 app.get('/', (req, res) => {
   res.json({
     message: 'Math API',
